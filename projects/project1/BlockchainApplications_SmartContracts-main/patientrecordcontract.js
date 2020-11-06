@@ -74,18 +74,21 @@ class PatientRecordContract extends Contract {
      * @param {String} dob date of birth
      * @param {String} gender  gender
      * @param {String} blood_type blood type
+     * @param {String} last_checkup_date the last checkup date
      */
-    async createPatientRecord(ctx,username,name,dob,gender,blood_type){
-        let precord = PatientRecord.createInstance(username,name,dob,gender,blood_type);
+    async createPatientRecord(ctx,username,name,dob,gender,blood_type,last_checkup_date){
+        let precord = PatientRecord.createInstance(username,name,dob,gender,blood_type,last_checkup_date);
         //TASK 0
         // Add patient record by calling the method in the PRecordList
-        throw new Error()
+        ctx.PatientRecordList.addPRecord(precord)
+        //throw new Error()
         return precord.toBuffer();
     }
 
     async getPatientByKey(ctx, username, name){
         let precordKey = PatientRecord.makeKey([username,name]);
         //TASK-1: Use a method from patientRecordList to read a record by key
+        let precord = ctx.PatientRecordList.getPRrecord(precordKey)
         return JSON.stringify(precord)
     }
 
@@ -97,13 +100,16 @@ class PatientRecordContract extends Contract {
      * @param {String} name name
      * @param {String} last_checkup_date date string 
      */
-    /*async updateCheckupDate(ctx,username,name,last_checkup_date){
+    async updateCheckupDate(ctx,username,name,last_checkup_date){
         let precordKey = PatientRecord.makeKey([username,name]);
         //TASK-3: Use a method from patientRecordList to read a record by key
         //Use set_last_checkup_date from PatientRecord to update the last_checkup_date field
         //Use updatePRecord from patientRecordList to update the record on the ledger
+        let precord = ctx.PatientRecordList.getPRrecord(precordKey)
+        precord.setlastCheckupDate(last_checkup_date)
+        ctx.PatientRecordList.updatePRecord(precord)
        return precord.toBuffer();
-    }*/
+    }
 
 
 
