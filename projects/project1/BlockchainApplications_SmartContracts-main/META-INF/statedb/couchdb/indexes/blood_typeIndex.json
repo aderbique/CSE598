@@ -1,0 +1,8 @@
+{
+    "index": {
+        "fields": [ "blood_type"]
+    },
+    "ddoc": "blood_typeIndexDoc",
+    "name": "blood_typeIndex",
+    "type": "json"
+}
