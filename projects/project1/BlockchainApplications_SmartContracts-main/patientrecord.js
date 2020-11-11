@@ -19,7 +19,7 @@ class PatientRecord extends State {
     getgender() { return this.gender }
     setgender(newgender) { return this.gender=newgender }
 
-    getbloodtype() { return this.gender }
+    getbloodtype() { return this.blood_type }
     setbloodtype(newbloodtype) { return this.blood_type=newbloodtype }
 
     
